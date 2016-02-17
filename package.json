@@ -6,6 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress -p",
     "watch": "NODE_ENV=development ./node_modules/.bin/webpack --watch --progress",
+    "demo": "NODE_ENV=development ./node_modules/.bin/webpack --config webpack.demo.config.js --watch --progress",
     "prepublish": "npm run build"
   },
   "keywords": [],
