@@ -48,8 +48,6 @@
 	
 	var _dist = __webpack_require__(1);
 	
-	var _dist2 = _interopRequireDefault(_dist);
-	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -58,7 +56,17 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _reactDom.render)(_react2.default.createElement(_dist2.default, { repo: "fortruce/react-fullstack-skeleton" }), document.getElementById("app"));
+	(0, _reactDom.render)(_react2.default.createElement(
+		"div",
+		{ style: {
+				display: "flex",
+				justifyContent: "space-between",
+				width: 340
+			} },
+		_react2.default.createElement(_dist.GithubStar, { repo: "fortruce/react-fullstack-skeleton" }),
+		_react2.default.createElement(_dist.GithubFork, { repo: "fortruce/react-fullstack-skeleton" }),
+		_react2.default.createElement(_dist.GithubWatch, { repo: "fortruce/react-fullstack-skeleton" })
+	), document.getElementById("app"));
 
 /***/ },
 /* 1 */
@@ -125,6 +133,7 @@
 		Object.defineProperty(exports, "__esModule", {
 			value: true
 		});
+		exports.GithubWatch = exports.GithubFork = exports.GithubStar = undefined;
 		
 		var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 		
@@ -147,6 +156,7 @@
 		
 		var buttonStyle = {
 			float: "left",
+			outline: "none",
 			padding: "2px 10px",
 			fontWeight: "bold",
 			lineHeight: "20px",
@@ -166,6 +176,27 @@
 			backgroundColor: "#ddd",
 			backgroundImage: "linear-gradient(#eee, #ddd)",
 			borderColor: "#ccc"
+		};
+		
+		var numStyle = {
+			textDecoration: "none",
+			padding: "2px 7px",
+			fontSize: "11px",
+			fontWeight: "bold",
+			lineHeight: "20px",
+			color: "#333",
+			verticalAlign: "middle",
+			backgroundColor: "#fff",
+			border: "1px solid #ddd",
+			borderLeft: "0",
+			borderTopRightRadius: "3px",
+			borderBottomRightRadius: "3px",
+			float: "left"
+		};
+		
+		var numHoverStyle = {
+			cursor: "pointer",
+			color: "#4078c0"
 		};
 		
 		var onHover = function onHover(baseStyle, hoverStyle, BaseComponent) {
@@ -207,56 +238,70 @@
 			}(_react.Component);
 		};
 		
-		var Star = function Star(_ref) {
+		var GithubButton = function GithubButton(_ref) {
 			var style = _ref.style;
-		
+			var label = _ref.label;
+			var path = _ref.path;
+			var width = _ref.width;
+			var height = _ref.height;
 			return _react2.default.createElement(
 				"button",
 				{ style: style },
 				_react2.default.createElement(
 					"svg",
 					{
-						style: {
-							verticalAlign: "text-top"
-						},
+						style: { verticalAlign: "text-top" },
 						"aria-hidden": "true",
-						height: "16",
+						height: height,
 						role: "img",
 						version: "1.1",
-						viewBox: "0 0 14 16",
-						width: "14" },
-					_react2.default.createElement("path", { d: "M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z" })
+						viewBox: "0 0 " + width + " " + height,
+						width: width
+					},
+					_react2.default.createElement("path", { d: path })
 				),
-				" Star"
+				" ",
+				label
 			);
 		};
-		Star = onHover(buttonStyle, buttonHoverStyle, Star);
+		GithubButton.defaultProps = {
+			width: "14",
+			height: "16"
+		};
 		
-		var numStyle = {
-			textDecoration: "none",
-			padding: "2px 7px",
-			fontSize: "11px",
-			fontWeight: "bold",
-			lineHeight: "20px",
-			color: "#333",
-			verticalAlign: "middle",
-			backgroundColor: "#fff",
-			border: "1px solid #ddd",
-			borderLeft: "0",
-			borderTopRightRadius: "3px",
-			borderBottomRightRadius: "3px",
-			float: "left"
-		};
-		var numHoverStyle = {
-			cursor: "pointer",
-			color: "#4078c0"
-		};
+		var Star = onHover(buttonStyle, buttonHoverStyle, function (_ref2) {
+			var style = _ref2.style;
+			return _react2.default.createElement(GithubButton, {
+				style: style,
+				label: "Star",
+				path: "M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z" });
+		});
+		
+		var Fork = onHover(buttonStyle, buttonHoverStyle, function (_ref3) {
+			var style = _ref3.style;
+			return _react2.default.createElement(GithubButton, {
+				style: style,
+				label: "Fork",
+				path: "M8 1c-1.11 0-2 0.89-2 2 0 0.73 0.41 1.38 1 1.72v1.28L5 8 3 6v-1.28c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72v1.78l3 3v1.78c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V9.5l3-3V4.72c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2zM2 4.2c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3 10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3-10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z" });
+		});
+		
+		var Watch = onHover(buttonStyle, buttonHoverStyle, function (_ref4) {
+			var style = _ref4.style;
+			return _react2.default.createElement(GithubButton, {
+				style: style,
+				width: "16",
+				label: "Watch",
+				path: "M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z" });
+		});
+		
 		var CountSpan = onHover(numStyle, numHoverStyle, "span");
 		
-		var StarCount = function StarCount(_ref2) {
-			var count = _ref2.count;
-			var repo = _ref2.repo;
-		
+		var ButtonCount = function ButtonCount(_ref5) {
+			var count = _ref5.count;
+			var repo = _ref5.repo;
+			var buttonLink = _ref5.buttonLink;
+			var countLink = _ref5.countLink;
+			var type = _ref5.type;
 			return _react2.default.createElement(
 				"div",
 				{ style: {
@@ -264,12 +309,12 @@
 					} },
 				_react2.default.createElement(
 					"a",
-					{ href: GITHUB + "/" + repo },
-					_react2.default.createElement(Star, null)
+					{ href: buttonLink || GITHUB + "/" + repo },
+					_react2.default.createElement(type)
 				),
 				_react2.default.createElement(
 					"a",
-					{ href: GITHUB + "/" + repo + "/stargazers" },
+					{ href: countLink || GITHUB + "/" + repo + "/stargazers" },
 					_react2.default.createElement(
 						CountSpan,
 						null,
@@ -297,13 +342,13 @@
 			request.send();
 		}
 		
-		var GithubStar = function (_Component2) {
-			_inherits(GithubStar, _Component2);
+		var GithubBadge = function (_Component2) {
+			_inherits(GithubBadge, _Component2);
 		
-			function GithubStar(props) {
-				_classCallCheck(this, GithubStar);
+			function GithubBadge(props) {
+				_classCallCheck(this, GithubBadge);
 		
-				var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(GithubStar).call(this, props));
+				var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(GithubBadge).call(this, props));
 		
 				_this3.state = {
 					count: 0
@@ -311,28 +356,58 @@
 				return _this3;
 			}
 		
-			_createClass(GithubStar, [{
+			_createClass(GithubBadge, [{
 				key: "componentDidMount",
 				value: function componentDidMount() {
 					var _this4 = this;
 		
 					getRepoInfo(this.props.repo, function (err, info) {
-						return err || _this4.setState({ count: info.stargazers_count });
+						return err || _this4.setState({ count: _this4.props.countFn(info) });
 					});
 				}
 			}, {
 				key: "render",
 				value: function render() {
-					return _react2.default.createElement(StarCount, {
-						repo: this.props.repo,
-						count: this.state.count });
+					return _react2.default.createElement(ButtonCount, _extends({}, this.props, {
+						count: this.state.count }));
 				}
 			}]);
 		
-			return GithubStar;
+			return GithubBadge;
 		}(_react.Component);
-	
-		exports.default = GithubStar;
+		
+		var GithubStar = exports.GithubStar = function GithubStar(props) {
+			return _react2.default.createElement(GithubBadge, _extends({
+				buttonLink: GITHUB + "/" + props.repo,
+				countLink: GITHUB + "/" + props.repo + "/stargazers"
+			}, props, {
+				type: Star,
+				countFn: function countFn(info) {
+					return info.stargazers_count;
+				} }));
+		};
+		
+		var GithubFork = exports.GithubFork = function GithubFork(props) {
+			return _react2.default.createElement(GithubBadge, _extends({
+				buttonLink: GITHUB + "/" + props.repo,
+				countLink: GITHUB + "/" + props.repo + "/network"
+			}, props, {
+				type: Fork,
+				countFn: function countFn(info) {
+					return info.forks_count;
+				} }));
+		};
+		
+		var GithubWatch = exports.GithubWatch = function GithubWatch(props) {
+			return _react2.default.createElement(GithubBadge, _extends({
+				buttonLink: GITHUB + "/" + props.repo + "/subscription",
+				countLink: GITHUB + "/" + props.repo + "/watchers"
+			}, props, {
+				type: Watch,
+				countFn: function countFn(info) {
+					return info.watchers_count;
+				} }));
+		};
 	
 	/***/ },
 	/* 1 */
